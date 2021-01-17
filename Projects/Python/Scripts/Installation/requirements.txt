@@ -1,0 +1,8 @@
+opencv-python
+numpy
+jsonpickle
+flask
+h5py
+requests
+scikit-image
+tensorflow
