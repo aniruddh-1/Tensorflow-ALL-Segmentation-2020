@@ -1,14 +1,12 @@
 ############################################################################################
 #
 # Project:       Peter Moss COVID-19 AI Research Project
-# Repository:    AI-Classification
-# Repo Project:  COVID-19 Tensorflow DenseNet Classifier
+# Repository:    Tensorflow-ALL-Segmentation-2020
+# Project:       Tensorflow-ALL-Segmentation-2020
 #
-# Author:        Adam Milton-Barker (AdamMiltonBarker.com)
-# Contributors:
+# Author:        Aniruddh Sharma
 # Title:         Server Class
-# Description:   Server functions for the COVID-19 Tensorflow DenseNet Classifier for the
-#                Raspberry Pi 4.
+# Description:   Server functions for Tensorflow-ALL-Segmentation-2020
 # License:       MIT License
 # Last Modified: 2020-06-29
 #
@@ -48,10 +46,10 @@ class Server():
             classification, confidence = self.model.http_classify(request)
 
             if classification == 1:
-                message = "COVID-19 detected!"
+                message = "Leukemia detected!"
                 diagnosis = "Positive"
             elif classification == 0:
-                message = "COVID-19 not detected!"
+                message = "Leukemia not detected!"
                 diagnosis = "Negative"
 
             resp = jsonpickle.encode({
