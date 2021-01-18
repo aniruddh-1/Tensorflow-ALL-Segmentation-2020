@@ -4,11 +4,12 @@
 # Repository:    Tensorflow-ALL-Segmentation-2020
 # Project:       Tensorflow-ALL-Segmentation-2020
 #
-# Author:        Aniruddh Sharma
+# Author:        Adam Milton-Barker (AdamMiltonBarker.com)
+# Contributors:  Aniruddh Sharma
 # Title:         Server Class
 # Description:   Server functions for Tensorflow-ALL-Segmentation-2020
 # License:       MIT License
-# Last Modified: 2020-06-29
+# Last Modified: 2021-01-18
 #
 ############################################################################################
 
@@ -23,7 +24,7 @@ from Classes.Model import Model
 
 class Server():
     """ Server helper class
-    Server functions for the COVID-19 Tensorflow DenseNet Classifier.
+    Server functions for the Tensorflow-ALL-Segmentation-2020.
     """
 
     def __init__(self, model):
@@ -43,20 +44,21 @@ class Server():
             """ Responds to standard HTTP request. """
 
             message = ""
-            classification, confidence = self.model.http_classify(request)
+            img_pred, label = self.model.get_prediction(model, test_img_folder)
 
-            if classification == 1:
-                message = "Leukemia detected!"
-                diagnosis = "Positive"
-            elif classification == 0:
-                message = "Leukemia not detected!"
-                diagnosis = "Negative"
+            for classification in label:
+                if classification == 1:
+                    message = "Leukemia detected!"
+                    diagnosis = "Positive"
+                elif classification == 0:
+                    message = "Leukemia not detected!"
+                    diagnosis = "Negative"
 
             resp = jsonpickle.encode({
                 'Response': 'OK',
                 'Message': message,
                 'Diagnosis': diagnosis,
-                'Confidence': np.asscalar(confidence)
+                'Image': img_pred
             })
 
             return Response(response=resp, status=200, mimetype="application/json")

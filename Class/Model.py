@@ -37,6 +37,7 @@ class Model():
         """ Initializes the class. """
 
         self.Helpers = Helpers("Model", False)
+        self.model = None
 
     def do_model(self):
 
@@ -106,6 +107,7 @@ class Model():
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=[tf.keras.metrics.BinaryAccuracy(name='accuracy'),
                                                                              tf.keras.metrics.AUC(name='auc')])
         model.fit(X_train, y_train, batch_size=5, epochs=5, verbose=1, validation_split=0.1)
+        self.model = model
         self.Helpers.logger.info("Model training complete.")
 
 
@@ -127,5 +129,11 @@ class Model():
         predict = model.predict(images)
         img_pred = np.array(255*predict, dtype = np.uint8)
         labels = img_pred[:,0,0,0]
+        label=[]
+        for x in labels:
+            a=0
+            if int(x)>0:
+                a=1
+            label.append(a)
 
-        return img_pred, labels
+        return img_pred, label

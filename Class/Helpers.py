@@ -4,7 +4,7 @@
 # Repository:    Tensorflow-ALL-Segmentation-2020
 # Project:       Tensorflow-ALL-Segmentation-2020
 #
-# Author:        Aniruddh Sharma
+# Author:        Adam Milton-Barker (AdamMiltonBarker.com)
 # Title:         Helper Class
 # Description:   Helper functions for the Tensorflow-ALL-Segmentation-2020
 # License:       MIT License
